@@ -1,33 +1,3 @@
-
-def CompleteUpdate(src_dir, dest_dir):
-    try:
-        for item in os.listdir(src_dir):
-            src_path = os.path.join(src_dir, item)
-            dest_path = os.path.join(dest_dir, item)
-            shutil.move(src_path, dest_path)
-    except:
-        pass
-    command = 'del /f /s /q "{}\*" '.format(src_dir)
-    os.system(command)
-    command = 'for /d %x in ("{}\*") do rmdir /s /q "%x"'.format(src_dir)
-    os.system(command)
-    
-def ExtractUpdateFiles():
-    extractor_path = resource_path('External\\Extractors\\7z\\7z.exe')
-    if os.path.exists("UpdateFiles"):
-        pass
-    else:
-        os.system("mkdir UpdateFiles")
-    file_path = resource_path(filename)
-    output_dir = resource_path('UpdateFiles')
-    command = '"{}" x "{}" -o"{}" -r -y'.format(extractor_path, file_path, output_dir)
-    subprocess.run(command, shell=True)
-    command = 'del /f /s /q "{}" '.format(file_path)
-    os.system(command)
-    source_dir = resource_path('UpdateFiles')
-    out_dir = resource_path("")
-    CompleteUpdate(source_dir, out_dir)
-
 def GetUpdateFiles():
     global filename
     url = 'https://www.dropbox.com/scl/fi/vwxvwd3vd23e288o8z29n/ModernGUI.zip?rlkey=lkx9w4j1rxttemi5q78053mrl&st=tl2t9994&dl=1'
