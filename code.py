@@ -1,6 +1,11 @@
 def GetUpdateFiles():
-    global filename
-    url = 'https://www.dropbox.com/scl/fi/vwxvwd3vd23e288o8z29n/ModernGUI.zip?rlkey=lkx9w4j1rxttemi5q78053mrl&st=tl2t9994&dl=1'
+    global filename, cur, con
+    cur.execute("SELECT LINK FROM UPDATELINK")
+    url = cur.fetchone()
+    try:
+        data = data[0]
+    except TypeError:
+        pass
     filename = get_filename_from_url(url)
 
     if os.path.exists(filename) != True:
