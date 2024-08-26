@@ -3,7 +3,7 @@ def GetUpdateFiles():
     cur.execute("SELECT LINK FROM UPDATELINK")
     url = cur.fetchone()
     try:
-        data = data[0]
+        url = url[0]
     except TypeError:
         pass
     filename = get_filename_from_url(url)
