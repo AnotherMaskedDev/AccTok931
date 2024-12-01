@@ -1,5 +1,6 @@
 def GetUpdateFiles():
     global filename, cur, con
+    print("Checking for updates\n")
     cur.execute("SELECT LINK FROM UPDATELINK")
     url = cur.fetchone()
     try:
@@ -12,6 +13,7 @@ def GetUpdateFiles():
         response = requests.get(url, stream=True)
 
         if response.status_code == 200:
+            print("Update Found!\n")
             total_size = int(response.headers.get('content-length', 0))
             block_size = 8192  # 8 KB
             downloaded_size = 0
